@@ -1,0 +1,75 @@
+<router-outlet></router-outlet>
+
+<mat-form-field appearance="outline">
+  <mat-label>Filtrar</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Algodón, Tela, Pintura..." />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="idMaterial">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let row">{{ row.idMaterial }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- Measurement Unit Column -->
+    <ng-container matColumnDef="measurementUnit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Unidad de Medida</th>
+      <td mat-cell *matCellDef="let row">{{ row.measurementUnit }}</td>
+    </ng-container>
+
+    <!-- Unit Price Column -->
+    <ng-container matColumnDef="unitPrice">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio Unitario</th>
+      <td mat-cell *matCellDef="let row">{{ row.unitPrice | currency:'PEN':'symbol':'1.2-2' }}</td>
+    </ng-container>
+
+    <!-- Actual Stock Column -->
+    <ng-container matColumnDef="actualStock">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock Actual</th>
+      <td mat-cell *matCellDef="let row">{{ row.actualStock }}</td>
+    </ng-container>
+
+    <!-- Supplier Column -->
+    <ng-container matColumnDef="supplier">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Proveedor</th>
+      <td mat-cell *matCellDef="let row">{{ row.supplier?.name }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-button [routerLink]="['edit', row.idMaterial]">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button (click)="delete(row.idMaterial)">
+          <mat-icon>delete</mat-icon>
+          Eliminar
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns()"></tr>
+  </table>
+</div>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Seleccionar página de materiales"
+></mat-paginator>
+
+<button mat-fab color="primary" style="float: right" routerLink="/pages/material/new">
+  <mat-icon>add</mat-icon>
+</button>
