@@ -10,13 +10,13 @@
   <!-- Nombre del material -->
   <mat-form-field appearance="outline">
     <mat-label>Nombre del Material</mat-label>
-    <input matInput placeholder="Ej. Tela de algodón" formControlName="name">
+    <input matInput placeholder="-Material" formControlName="name">
   </mat-form-field>
 
   <!-- Unidad de medida -->
   <mat-form-field appearance="outline">
     <mat-label>Unidad de Medida</mat-label>
-    <input matInput placeholder="Ej. metros, kilos, unidades" formControlName="measurementUnit">
+    <input matInput  formControlName="measurementUnit">
   </mat-form-field>
 
   <!-- Precio unitario -->
@@ -45,7 +45,7 @@
 
   <!-- Proveedor (select) -->
   <mat-form-field appearance="outline">
-    <mat-label>Proveedor</mat-label>
+    <mat-label>Supplier</mat-label>
     <mat-select formControlName="supplier" [compareWith]="compareSuppliers">
       <mat-option *ngFor="let s of suppliers" [value]="s">
         {{ s.name }}

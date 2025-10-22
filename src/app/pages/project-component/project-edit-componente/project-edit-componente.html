@@ -1,0 +1,55 @@
+<form class="example-container" [formGroup]="form" (ngSubmit)="operate()">
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID Proyecto" formControlName="idProject">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="Nombre del Proyecto" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Ubicación" formControlName="location">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Fecha de Inicio" [matDatepicker]="startDatePicker" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Fecha Estimada de Fin" [matDatepicker]="endDatePicker" formControlName="estimatedEndDate">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Estado" formControlName="status">
+      <mat-option value="activo">Activo</mat-option>
+      <mat-option value="inactivo">Inactivo</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Cliente</mat-label>
+    <mat-select formControlName="customer" [compareWith]="compareCustomers">
+      <mat-option *ngFor="let customer of customers" [value]="customer">
+        {{ customer.name }} - {{ customer.idCustomer }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="form-actions">
+    <button mat-button type="submit">
+      <mat-icon>done</mat-icon>
+      <span>{{ isEdit ? 'Actualizar' : 'Registrar' }} Proyecto</span>
+    </button>
+
+    <button mat-button type="button" routerLink="/pages/project">
+      <mat-icon>cancel</mat-icon>
+      <span>Cancelar</span>
+    </button>
+  </div>
+</form>

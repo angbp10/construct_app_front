@@ -64,6 +64,13 @@
                 <span>Project</span>
             </button>
             <mat-divider></mat-divider>
+            <button class="myButton"  mat-menu-item (click)="sidenav.toggle()"
+                routerLink="/pages/material" style="cursor: pointer">
+                <mat-icon>assignment</mat-icon>
+                <span>Material</span>
+            </button>
+
+            <mat-divider></mat-divider>
             <button class="myButton"   mat-menu-item (click)="sidenav.toggle()"
                 routerLink="/pages/patient" style="cursor: pointer">
                 <mat-icon>accessibility</mat-icon>
